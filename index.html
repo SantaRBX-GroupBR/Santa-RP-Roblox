@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="color-scheme" content="dark">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cidade Santa RP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Hanken+Grotesk:wght@400;500;700&display=swap">
+<script>if("IntersectionObserver"in window)document.documentElement.classList.add("js")</script>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+color-scheme:dark;--bg:#0a0a0a;--bg2:#141414;--tx:#f4f1f1;--mut:#a39a9c;--bd:rgba(255,255,255,.1);--red:#ff1f3d;--sil:#ece8e9;
+--hd:"Big Shoulders Display",Impact,"Arial Narrow",sans-serif;--bd2:"Hanken Grotesk",system-ui,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+.vh{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 var(--bd2);overflow-x:hidden}
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:rgba(9,10,14,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);z-index:10}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+
+/* topo */
+header{position:fixed;top:0;left:0;right:0;z-index:30;height:calc(64px + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) 16px 0;display:flex;align-items:center;gap:14px;background:rgba(9,10,14,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08);color:#f1f2f6}
+#bar{position:absolute;left:0;bottom:-1px;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#7a0a1a,#ff2a4d)}
+#burger{width:44px;height:44px;border:1px solid rgba(255,255,255,.16);border-radius:12px;background:rgba(255,255,255,.05);display:grid;place-content:center;gap:5px;cursor:pointer;transition:background .25s}
+#burger:hover{background:rgba(255,255,255,.12)}
+#burger i{display:block;width:20px;height:2px;background:#fff;border-radius:2px;transition:transform .35s,opacity .25s}
+#mt:checked~header #burger i:nth-child(1){transform:translateY(7px) rotate(45deg)}
+#mt:checked~header #burger i:nth-child(2){opacity:0}
+#mt:checked~header #burger i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.logo{font:900 24px/1 var(--hd);letter-spacing:.06em;text-transform:uppercase;flex:1}
+.logo b{color:#fff;background:var(--red);padding:2px 7px;border-radius:4px;margin-left:6px;font-size:.8em}
+.btn{display:inline-block;font-weight:700;padding:11px 22px;border-radius:999px;transition:transform .25s,box-shadow .25s,background .25s}
+.btn:hover{transform:translateY(-3px)}
+.btn.red{background:var(--red);color:#fff;box-shadow:0 8px 28px -8px var(--red)}
+.btn.red:hover{box-shadow:0 14px 34px -6px var(--red)}
+.btn.ghost{border:1px solid rgba(255,255,255,.28);color:#fff}
+.btn.ghost:hover{background:rgba(255,255,255,.1)}
+header .btn{padding:9px 18px;font-size:14px}
+
+/* menu lateral */
+#ov{position:fixed;top:0;right:0;bottom:0;left:0;z-index:40;background:rgba(3,4,8,.6);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .35s}
+#drawer{position:fixed;top:0;bottom:0;left:0;z-index:50;width:min(330px,86vw);padding:calc(env(safe-area-inset-top,0px) + 84px) 18px 28px;overflow-y:auto;background:var(--bg2);border-right:1px solid var(--bd);transform:translateX(-102%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s .45s}
+#mt:checked~#drawer{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+#mt:checked~#ov{opacity:1;pointer-events:auto}
+#drawer a{display:block;border-radius:10px;transition:background .2s,color .2s,padding .2s,border-color .2s}
+
+#drawer .tbtn{margin:0 0 10px;padding:16px 18px;border:1px solid var(--bd);border-radius:12px;background:rgba(255,255,255,.04);font:900 23px/1 var(--hd);letter-spacing:.06em;text-transform:uppercase;transition:background .25s,border-color .25s,transform .25s,box-shadow .25s}
+#drawer .tbtn.l{border-left:4px solid var(--sil)}#drawer .tbtn.i{border-left:4px solid var(--red)}
+#drawer .tbtn:hover,#drawer .tbtn.on{background:var(--red);border-color:var(--red);color:#fff;transform:translateX(6px);box-shadow:0 10px 26px -10px var(--red)}
+
+/* hero */
+.hero{position:relative;min-height:96vh;min-height:96svh;display:grid;place-items:center;text-align:center;padding:120px 20px 80px;overflow:hidden;background:#050505;color:#f1f2f6;isolation:isolate}
+.hero::before,.hero::after{content:"";position:absolute;z-index:-1;width:90vmax;height:90vmax;top:-30vmax;border-radius:50%;filter:blur(70px);opacity:0}
+.hero::before{left:-60vmax;background:radial-gradient(closest-side,rgba(255,20,60,.75),transparent);animation:siren 2.4s ease-in-out infinite}
+.hero::after{right:-60vmax;background:radial-gradient(closest-side,rgba(140,0,20,.9),transparent);animation:siren 2.4s ease-in-out 1.2s infinite}
+@keyframes siren{0%,100%{opacity:0;transform:translateX(0)}45%{opacity:.9;transform:translateX(18vmax)}}
+.grid-bg{position:absolute;left:0;right:0;bottom:0;height:55%;z-index:-1;background:linear-gradient(rgba(255,31,61,.17) 1px,transparent 1px) 0 0/100% 56px,linear-gradient(90deg,rgba(255,31,61,.17) 1px,transparent 1px) 0 0/56px 100%;transform:perspective(500px) rotateX(58deg);transform-origin:50% 100%;-webkit-mask:linear-gradient(transparent,#000 70%);mask:linear-gradient(transparent,#000 70%);animation:road 3s linear infinite}
+@keyframes road{to{background-position:0 56px,56px 0}}
+.hero h1{margin:0;font:900 clamp(60px,17vw,170px)/.88 var(--hd);letter-spacing:.02em;text-transform:uppercase}
+.hero h1 span{display:inline-block;opacity:0;animation:drop .8s cubic-bezier(.2,.9,.3,1.2) forwards}
+.hero h1 .rp{color:var(--red);text-shadow:0 0 40px rgba(255,42,77,.6)}
+@keyframes drop{from{opacity:0;transform:translateY(-60px) scale(1.3);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
+.lights{display:flex;justify-content:center;gap:6px;margin:26px 0 22px}
+.lights i{width:clamp(28px,8vw,56px);height:8px;border-radius:4px;background:var(--red);box-shadow:0 0 18px var(--red);animation:blink 1s steps(1) infinite}
+.lights i:nth-child(n+4){background:var(--red);box-shadow:0 0 18px var(--red);animation-delay:.5s}
+.lights i:nth-child(even){animation-delay:.5s}.lights i:nth-child(n+4):nth-child(even){animation-delay:0s}
+@keyframes blink{50%{opacity:.18}}
+.hero p{max-width:34em;margin:0 auto 30px;color:#c4b9bb;font-size:clamp(17px,2.6vw,21px);opacity:0;animation:fade 1s .9s forwards}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fade 1s 1.1s forwards}
+@keyframes fade{to{opacity:1}}
+.motto{margin-top:50px;font:900 clamp(32px,8vw,60px)/1.02 var(--hd);letter-spacing:.02em;opacity:0;animation:fade 1s 1.3s forwards}
+.motto b{color:var(--red);animation:glow 2.2s ease-in-out infinite alternate}
+@keyframes glow{from{text-shadow:0 0 6px rgba(255,31,61,.2)}to{text-shadow:0 0 34px rgba(255,31,61,.9)}}
+.scroll{position:absolute;left:50%;bottom:22px;width:22px;height:36px;margin-left:-11px;border:2px solid rgba(255,255,255,.35);border-radius:12px}
+.scroll::after{content:"";position:absolute;left:50%;top:6px;width:4px;height:7px;margin-left:-2px;border-radius:2px;background:#fff;animation:wheel 1.6s infinite}
+@keyframes wheel{to{transform:translateY(12px);opacity:0}}
+
+/* seções */
+.sec{max-width:1100px;margin:0 auto;padding:92px 20px}
+h2{margin:0 0 14px;font:900 clamp(38px,8vw,64px)/.95 var(--hd);text-transform:uppercase;letter-spacing:.02em}
+.lead{max-width:60ch;color:var(--mut);margin:0}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));margin-top:36px}
+.card{position:relative;overflow:hidden;padding:24px;border-radius:16px;background:var(--bg2);border:1px solid var(--bd);transition:transform .3s,border-color .3s,box-shadow .3s}
+.card::before{content:"";position:absolute;top:0;right:0;bottom:0;left:0;background:radial-gradient(280px circle at var(--mx,50%) var(--my,0),rgba(127,127,160,.22),transparent 70%);opacity:0;transition:opacity .3s;background:radial-gradient(280px circle at var(--mx,50%) var(--my,0),color-mix(in srgb,var(--c) 26%,transparent),transparent 70%)}
+.card:hover{transform:translateY(-6px);border-color:var(--c);box-shadow:0 18px 40px -22px var(--c)}
+.card:hover::before{opacity:1}
+.card>*{position:relative}
+.card .badge{display:grid;place-items:center;width:58px;height:58px;margin-bottom:16px;border-radius:14px;background:var(--c);color:#fff;font:900 24px/1 var(--hd);letter-spacing:.04em;transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+.card:hover .badge{transform:rotate(-8deg) scale(1.12)}
+.card h3{margin:0 0 8px;font:900 27px/1.05 var(--hd);letter-spacing:.02em;text-transform:uppercase}
+.card p{margin:0 0 16px;color:var(--mut);font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-size:12.5px;padding:3px 11px;border-radius:999px;border:1px solid var(--bd);color:var(--mut)}
+#gl{--c:var(--sil)}#gl .badge{color:#0a0a0a}#gi{--c:var(--red)}
+.ill{background:radial-gradient(70% 55% at 50% 0,rgba(255,42,77,.14),transparent);background:radial-gradient(70% 55% at 50% 0,color-mix(in srgb,var(--red) 14%,transparent),transparent)}
+.about{display:grid;gap:34px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start}
+.feat{display:grid;gap:12px}
+.feat div{padding:18px 20px;border-radius:14px;border-left:4px solid var(--c);background:var(--bg2);border-top:1px solid var(--bd);border-right:1px solid var(--bd);border-bottom:1px solid var(--bd);transition:transform .3s}
+.feat div:hover{transform:translateX(8px)}
+.feat b{display:block;font:900 22px/1.1 var(--hd);text-transform:uppercase}
+.feat span{color:var(--mut);font-size:15px}
+.rules{counter-reset:r;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));margin-top:36px;padding:0;list-style:none}
+.rules li{counter-increment:r;position:relative;padding:20px 20px 20px 74px;border-radius:14px;background:var(--bg2);border:1px solid var(--bd);transition:border-color .3s,transform .3s}
+.rules li:hover{border-color:var(--red);transform:translateY(-4px)}
+.rules li::before{content:counter(r);position:absolute;left:18px;top:16px;font:900 44px/1 var(--hd);color:var(--red)}
+.rules b{display:block;margin-bottom:4px}
+.rules span{color:var(--mut);font-size:15px}
+.steps{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:36px;counter-reset:s}
+.steps div{counter-increment:s;padding:22px;border-radius:14px;background:var(--bg2);border:1px solid var(--bd)}
+.steps div::before{content:counter(s);display:grid;place-items:center;width:38px;height:38px;margin-bottom:12px;border-radius:50%;background:var(--red);color:#fff;font:900 20px/1 var(--hd)}
+.steps div:last-child::before{background:var(--red)}
+.steps b{display:block}.steps span{color:var(--mut);font-size:15px}
+.join{margin-top:40px;padding:44px 24px;border-radius:22px;text-align:center;color:#fff;background:linear-gradient(110deg,#5c0614,#b00d28 50%,#ff1f3d);background-size:200% 100%;animation:pan 8s ease-in-out infinite alternate}
+@keyframes pan{to{background-position:100% 0}}
+.join h3{margin:0 0 18px;font:900 clamp(28px,6vw,44px)/1 var(--hd);text-transform:uppercase}
+.join .btn{background:#fff;color:#14161d}
+footer{padding:34px 20px;text-align:center;color:var(--mut);font-size:14px;border-top:1px solid var(--bd)}
+
+.js .reveal{opacity:0}
+.reveal.in{opacity:1;animation:up .7s var(--d,0ms) backwards}
+@keyframes up{from{opacity:0;transform:translateY(26px)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal,.hero h1 span,.hero p,.cta,.motto{opacity:1}}
+</style>
+</head>
+<body>
+<input type="checkbox" id="mt" class="vh" aria-hidden="true" tabindex="-1">
+<header>
+  <label id="burger" for="mt" role="button" tabindex="0" aria-label="Abrir menu" aria-controls="drawer"><i></i><i></i><i></i></label>
+  <a class="logo" href="#top">Cidade Santa<b>RP</b></a>
+  <a class="btn red" href="#entrar">Entrar</a>
+  <div id="bar"></div>
+</header>
+<label id="ov" for="mt"></label>
+<nav id="drawer" aria-label="Menu principal">
+  <a class="tbtn" href="#sobre">Sobre</a>
+  <a class="tbtn l" href="#legal">Legal</a>
+  <a class="tbtn i" href="#ilegal">Ilegal</a>
+  <a class="tbtn" href="#regras">Regras</a>
+  <a class="tbtn" href="#entrar">Como entrar</a>
+</nav>
+
+<section class="hero" id="top">
+  <div class="grid-bg"></div>
+  <div>
+    <h1 id="title" aria-label="Cidade Santa RP">Cidade Santa <span class="rp">RP</span></h1>
+    <div class="lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p>Duas leis, uma cidade. Escolha entre servir ao Estado ou dominar as ruas.</p>
+    <div class="cta"><a class="btn red" href="#entrar">Como entrar</a><a class="btn ghost" href="#legal">Conhecer a cidade</a></div>
+    <div class="motto">Crie sua <b>HISTÓRIA</b>,<br>crie seu <b>LEGADO</b>.</div>
+</div>
+  <div class="scroll" aria-hidden="true"></div>
+</section>
+
+<main>
+  <section class="sec" id="sobre">
+    <div class="about">
+      <div class="reveal">
+        <h2>Sobre a cidade</h2>
+        <p class="lead">Cidade Santa RP é um servidor de roleplay brasileiro onde cada jogador constrói a própria história. Governe, patrulhe as ruas, investigue crimes ou entre para uma organização criminosa e lute por território.</p>
+      </div>
+      <div class="feat">
+        <div class="reveal" style="--c:var(--red)"><b>Interpretação de verdade</b><span>Cada ação tem consequência dentro da história do seu personagem.</span></div>
+        <div class="reveal" style="--c:var(--red);--d:90ms"><b>Lei contra crime</b><span>Forças de segurança e facções disputam o controle da cidade todos os dias.</span></div>
+        <div class="reveal" style="--c:var(--red);--d:180ms"><b>Comunidade ativa</b><span>Equipe presente, eventos frequentes e regras claras para todos.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="legal">
+    <h2 class="reveal">Legal</h2>
+    <p class="lead reveal">Quem protege, administra e defende a cidade. Escolha uma carreira e suba na hierarquia.</p>
+    <div class="grid" id="gl"><article class="card reveal" id="governo" style="--d:0ms"><div class="badge">GOV</div><h3>Governo</h3><p>Prefeito, secretários e equipe que administram a cidade, criam leis e cuidam da economia.</p><div class="tags"><span>Administração</span><span>Leis</span><span>Economia</span></div></article><article class="card reveal" id="policia-militar" style="--d:80ms"><div class="badge">PM</div><h3>Polícia Militar</h3><p>Patrulhamento ostensivo e manutenção da ordem nas ruas.</p><div class="tags"><span>Patrulha</span><span>Abordagens</span><span>Ordem pública</span></div></article><article class="card reveal" id="policia-civil" style="--d:160ms"><div class="badge">PC</div><h3>Polícia Civil</h3><p>Investigação de crimes, inquéritos e trabalho de inteligência.</p><div class="tags"><span>Investigação</span><span>Inquéritos</span><span>Inteligência</span></div></article><article class="card reveal" id="policia-federal" style="--d:240ms"><div class="badge">PF</div><h3>Polícia Federal</h3><p>Combate ao crime organizado e operações de grande porte.</p><div class="tags"><span>Operações</span><span>Crime organizado</span><span>Elite</span></div></article><article class="card reveal" id="policia-rodoviaria-federal" style="--d:320ms"><div class="badge">PRF</div><h3>Polícia Rodoviária Federal</h3><p>Fiscalização das rodovias, perseguições e controle do tráfego.</p><div class="tags"><span>Rodovias</span><span>Perseguições</span><span>Fiscalização</span></div></article><article class="card reveal" id="exercito-brasileiro" style="--d:400ms"><div class="badge">EB</div><h3>Exército Brasileiro</h3><p>Defesa da cidade e apoio em situações críticas.</p><div class="tags"><span>Defesa</span><span>Operações especiais</span><span>Apoio</span></div></article></div>
+  </section>
+
+  <div class="ill">
+    <section class="sec" id="ilegal">
+      <h2 class="reveal">Ilegal</h2>
+      <p class="lead reveal">O submundo da Cidade Santa: facções, alianças e traições. Cada passo precisa de estratégia.</p>
+      <div class="grid" id="gi"><article class="card reveal" id="coreia" style="--d:0ms"><div class="badge">KR</div><h3>Coreia</h3><p>Organização criminosa com disciplina rígida e foco em controle de território.</p><div class="tags"><span>Território</span><span>Disciplina</span><span>Facção</span></div></article><article class="card reveal" id="franca" style="--d:80ms"><div class="badge">FR</div><h3>França</h3><p>Grupo sofisticado, especializado em negócios sujos e influência nos bastidores.</p><div class="tags"><span>Negócios</span><span>Influência</span><span>Facção</span></div></article><article class="card reveal" id="turquia" style="--d:160ms"><div class="badge">TR</div><h3>Turquia</h3><p>Facção ousada, conhecida por ações rápidas e alianças estratégicas.</p><div class="tags"><span>Ações rápidas</span><span>Alianças</span><span>Facção</span></div></article><article class="card reveal" id="cupula-do-ilegal" style="--d:240ms"><div class="badge">CÚP</div><h3>Cúpula do Ilegal</h3><p>Liderança que reúne as organizações e decide as grandes jogadas do submundo.</p><div class="tags"><span>Liderança</span><span>Acordos</span><span>Decisões</span></div></article></div>
+    </section>
+  </div>
+
+  <section class="sec" id="regras">
+    <h2 class="reveal">Regras</h2>
+    <p class="lead reveal">O básico que vale para todo mundo, do cidadão comum ao líder de facção.</p>
+    <ol class="rules" id="rl"><li class="reveal" style="--d:0ms"><b>Respeito acima de tudo</b><span>Sem ofensas, discriminação ou toxicidade, dentro ou fora do jogo.</span></li><li class="reveal" style="--d:70ms"><b>Proibido RDM e VDM</b><span>Não mate nem atropele jogadores sem um motivo de roleplay válido.</span></li><li class="reveal" style="--d:140ms"><b>Sem metagaming</b><span>Informações de fora do jogo não podem ser usadas pelo seu personagem.</span></li><li class="reveal" style="--d:210ms"><b>Sem powergaming</b><span>Não force ações impossíveis nem ignore as reações dos outros jogadores.</span></li><li class="reveal" style="--d:280ms"><b>Valorize a vida</b><span>Aja como alguém que teme morrer diante de armas e de perigo real.</span></li><li class="reveal" style="--d:350ms"><b>Sem cheats ou bugs</b><span>Trapaças e abuso de falhas resultam em banimento.</span></li></ol>
+  </section>
+
+  <section class="sec" id="entrar">
+    <h2 class="reveal">Como entrar</h2>
+    <p class="lead reveal">Em quatro passos você já está nas ruas da Cidade Santa.</p>
+    <div class="steps">
+      <div class="reveal"><b>Entre no Discord</b><span>É lá que ficam os avisos, o suporte e a comunidade.</span></div>
+      <div class="reveal" style="--d:90ms"><b>Leia as regras</b><span>Todo jogador precisa conhecer e aceitar as regras.</span></div>
+      <div class="reveal" style="--d:180ms"><b>Faça a aprovação</b><span>Complete o processo de entrada e aguarde a resposta da equipe.</span></div>
+      <div class="reveal" style="--d:270ms"><b>Escolha seu lado</b><span>Crie seu personagem e entre para o Legal ou para o Ilegal.</span></div>
+    </div>
+    <div class="join reveal">
+      <h3>Sua história começa agora</h3>
+      <a class="btn" href="https://discord.gg/SEU-CONVITE" target="_blank" rel="noopener">Entrar no Discord</a>
+    </div>
+  </section>
+</main>
+<footer>© 2026 Cidade Santa RP. Todos os direitos reservados.</footer>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+// título animado letra por letra
+(()=>{const h=$("#title");let n=0;const f=(t,c)=>[...t].map(ch=>ch===" "?" ":`<span class="${c}" style="animation-delay:${n++*60}ms">${ch}</span>`).join("");
+h.innerHTML=f("Cidade Santa","")+" "+f("RP","rp");})();
+
+// menu lateral
+const mt=$("#mt"),bt=$("#burger"),tg=o=>{mt.checked=o;bt.setAttribute("aria-label",o?"Fechar menu":"Abrir menu")};
+bt.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();tg(!mt.checked)}};mt.onchange=()=>tg(mt.checked);
+addEventListener("keydown",e=>e.key==="Escape"&&tg(false));
+$$("#drawer a").forEach(a=>a.addEventListener("click",()=>tg(false)));
+
+// destaque do item atual no menu
+const links=$$("#drawer a[href^='#']");
+const spy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id))}),{rootMargin:"-40% 0px -55% 0px"});
+$$("main section[id]").forEach(e=>spy.observe(e));
+
+// entrada ao rolar + contadores
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
+$$(".reveal").forEach(e=>io.observe(e));
+
+// brilho que segue o cursor nos cards
+$$(".card").forEach(c=>c.addEventListener("pointermove",e=>{const r=c.getBoundingClientRect();c.style.setProperty("--mx",e.clientX-r.left+"px");c.style.setProperty("--my",e.clientY-r.top+"px")}));
+
+// barra de progresso
+const bar=$("#bar");addEventListener("scroll",()=>{const h=document.documentElement;bar.style.transform=`scaleX(${scrollY/Math.max(h.scrollHeight-innerHeight,1)})`},{passive:true});
+</script>
+</body>
+</html>
